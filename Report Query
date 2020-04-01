@@ -1,0 +1,17 @@
+SELECT  
+T.CalendarYear, T.CalendarQuarter,T.EnglishMonthName, t.FullDateAlternateKey as day,
+P.EnglishProductName AS PRODUCT,
+SUM(S.SalesAmount) AS TOTAL_SALES 
+FROM SALES_DATA AS S
+JOIN
+TIME_DATA  AS T
+ON				
+S.OrderDateKey = T.TimeKey
+JOIN
+PRODUCTS_DATA AS P
+ON
+S.ProductKey = P.ProductKey
+GROUP BY 
+T.CalendarYear, T.CalendarQuarter,T.EnglishMonthName, t.FullDateAlternateKey,P.EnglishProductName
+ORDER BY			
+TOTAL_SALES
